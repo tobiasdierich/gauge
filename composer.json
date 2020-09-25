@@ -1,0 +1,44 @@
+{
+    "name": "tobiasdierich/gauge",
+    "description": "An easy to use application performance monitor.",
+    "keywords": ["laravel", "apm", "performance", "monitoring"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Dierich",
+            "email": "tobias@codelayer.de"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*",
+        "laravel/framework": "^6.0|^7.0",
+        "symfony/var-dumper": "^4.4|^5.0"
+    },
+    "require-dev": {
+        "ext-gd": "*",
+        "orchestra/testbench": "^4.0|^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "TobiasDierich\\Gauge\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TobiasDierich\\Gauge\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TobiasDierich\\Gauge\\GaugeServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
