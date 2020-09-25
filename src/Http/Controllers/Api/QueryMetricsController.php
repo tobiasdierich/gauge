@@ -1,6 +1,6 @@
 <?php
 
-namespace TobiasDierich\Gauge\Http\Controllers;
+namespace TobiasDierich\Gauge\Http\Controllers\Api;
 
 use TobiasDierich\Gauge\EntryType;
 
