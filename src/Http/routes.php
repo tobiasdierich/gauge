@@ -9,3 +9,5 @@ Route::prefix('gauge-api')->group(function () {
     Route::get('queries', 'Api\QueriesController@index');
     Route::post('queries/metrics', 'Api\QueryMetricsController@show');
 });
+
+Route::get('/', 'DashboardController@index');

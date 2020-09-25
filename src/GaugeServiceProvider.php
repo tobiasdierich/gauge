@@ -31,6 +31,10 @@ class GaugeServiceProvider extends ServiceProvider
 
         Gauge::start($this->app);
         Gauge::listenForStorageOpportunities($this->app);
+
+        $this->loadViewsFrom(
+            __DIR__.'/../resources/views', 'gauge'
+        );
     }
 
     /**
