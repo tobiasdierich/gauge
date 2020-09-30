@@ -31,5 +31,10 @@ class PublishCommand extends Command
             '--tag'   => 'gauge-config',
             '--force' => $this->option('force'),
         ]);
+
+        $this->call('vendor:publish', [
+            '--tag' => 'gauge-assets',
+            '--force' => true,
+        ]);
     }
 }

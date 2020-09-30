@@ -89,6 +89,10 @@ class GaugeServiceProvider extends ServiceProvider
             ], 'gauge-migrations');
 
             $this->publishes([
+                __DIR__.'/../public' => public_path('vendor/gauge'),
+            ], 'gauge-assets');
+
+            $this->publishes([
                 __DIR__ . '/../config/gauge.php' => config_path('gauge.php'),
             ], 'gauge-config');
 

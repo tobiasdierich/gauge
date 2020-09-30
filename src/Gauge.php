@@ -310,4 +310,16 @@ class Gauge
 
         return new static;
     }
+
+    /**
+     * Get the default JavaScript variables for Gauge.
+     *
+     * @return array
+     */
+    public static function scriptVariables()
+    {
+        return [
+            'path' => config('gauge.path'),
+        ];
+    }
 }
