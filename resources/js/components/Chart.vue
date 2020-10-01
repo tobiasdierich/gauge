@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
         <div class="p-4 flex justify-between items-end">
-            <span class="text-sm font-semibold text-gray-600">{{ title }}</span>
+            <h2 class="text-sm font-semibold text-gray-600">{{ title }}</h2>
 
             <div class="flex space-x-4">
                 <a

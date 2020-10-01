@@ -49,7 +49,8 @@ const defaultOptions = {
                 display: false
             }
         ]
-    }
+    },
+    animation: false
 }
 
 export default {
