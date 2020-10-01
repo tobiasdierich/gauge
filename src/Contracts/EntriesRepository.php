@@ -3,29 +3,19 @@
 namespace TobiasDierich\Gauge\Contracts;
 
 use Illuminate\Support\Collection;
-use TobiasDierich\Gauge\EntryResult;
-use TobiasDierich\Gauge\Storage\EntryQueryOptions;
+use TobiasDierich\Gauge\Storage\FamilyQueryOptions;
 
 interface EntriesRepository
 {
     /**
-     * Return an entry with the given ID.
-     *
-     * @param mixed $id
-     *
-     * @return \TobiasDierich\Gauge\EntryResult
-     */
-    public function find($id): EntryResult;
-
-    /**
-     * Return all the entries of a given type.
+     * Return all the entry families of a given type.
      *
      * @param string|null                                    $type
-     * @param \TobiasDierich\Gauge\Storage\EntryQueryOptions $options
+     * @param \TobiasDierich\Gauge\Storage\FamilyQueryOptions $options
      *
-     * @return \Illuminate\Support\Collection|\TobiasDierich\Gauge\EntryResult[]
+     * @return \Illuminate\Support\Collection|\TobiasDierich\Gauge\FamilyResult[]
      */
-    public function get($type, EntryQueryOptions $options);
+    public function getFamilies($type, FamilyQueryOptions $options);
 
     /**
      * Store the given entries.

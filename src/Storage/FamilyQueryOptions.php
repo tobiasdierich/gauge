@@ -4,7 +4,7 @@ namespace TobiasDierich\Gauge\Storage;
 
 use Illuminate\Http\Request;
 
-class EntryQueryOptions
+class FamilyQueryOptions
 {
     /**
      * The family hash that must belong to retrieved entries.
@@ -12,20 +12,6 @@ class EntryQueryOptions
      * @var string
      */
     public $familyHash;
-
-    /**
-     * The ID that all retrieved entries should be less than.
-     *
-     * @var mixed
-     */
-    public $beforeSequence;
-
-    /**
-     * The list of UUIDs of entries tor retrieve.
-     *
-     * @var mixed
-     */
-    public $uuids;
 
     /**
      * The number of entries to retrieve.
@@ -44,38 +30,8 @@ class EntryQueryOptions
     public static function fromRequest(Request $request)
     {
         return (new static)
-            ->uuids($request->uuids)
-            ->beforeSequence($request->before)
             ->familyHash($request->family_hash)
             ->limit($request->take ?? 50);
-    }
-
-    /**
-     * Set the list of UUIDs of entries tor retrieve.
-     *
-     * @param array $uuids
-     *
-     * @return $this
-     */
-    public function uuids(?array $uuids)
-    {
-        $this->uuids = $uuids;
-
-        return $this;
-    }
-
-    /**
-     * Set the ID that all retrieved entries should be less than.
-     *
-     * @param mixed $id
-     *
-     * @return $this
-     */
-    public function beforeSequence($id)
-    {
-        $this->beforeSequence = $id;
-
-        return $this;
     }
 
     /**

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use TobiasDierich\Gauge\Contracts\ClearableRepository;
 use TobiasDierich\Gauge\Contracts\EntriesRepository as Contract;
 use TobiasDierich\Gauge\Contracts\PrunableRepository;
-use TobiasDierich\Gauge\EntryResult;
+use TobiasDierich\Gauge\FamilyResult;
 
 class DatabaseEntriesRepository implements Contract, ClearableRepository, PrunableRepository
 {
@@ -44,54 +44,32 @@ class DatabaseEntriesRepository implements Contract, ClearableRepository, Prunab
     }
 
     /**
-     * Find the entry with the given ID.
+     * Return all families of a given type.
      *
-     * @param mixed $id
+     * @param string|null                                     $type
+     * @param \TobiasDierich\Gauge\Storage\FamilyQueryOptions $options
      *
-     * @return \TobiasDierich\Gauge\EntryResult
+     * @return \Illuminate\Support\Collection|\TobiasDierich\Gauge\FamilyResult[]
      */
-    public function find($id): EntryResult
-    {
-        $entry = EntryModel::on($this->connection)->whereUuid($id)->firstOrFail();
-
-        return new EntryResult(
-            $entry->uuid,
-            null,
-            $entry->batch_id,
-            $entry->type,
-            $entry->family_hash,
-            $entry->content,
-            $entry->created_at
-        );
-    }
-
-    /**
-     * Return all the entries of a given type.
-     *
-     * @param string|null                                    $type
-     * @param \TobiasDierich\Gauge\Storage\EntryQueryOptions $options
-     *
-     * @return \Illuminate\Support\Collection|\TobiasDierich\Gauge\EntryResult[]
-     */
-    public function get($type, EntryQueryOptions $options)
+    public function getFamilies($type, FamilyQueryOptions $options)
     {
         return EntryModel::on($this->connection)
-            ->withGaugeOptions($type, $options)
+            ->withFamilyOptions($type, $options)
             ->take($options->limit)
-            ->orderByDesc('sequence')
-            ->get()->reject(function ($entry) {
-                return !is_array($entry->content);
-            })->map(function ($entry) {
-                return new EntryResult(
-                    $entry->uuid,
-                    $entry->sequence,
-                    $entry->batch_id,
-                    $entry->type,
-                    $entry->family_hash,
-                    $entry->content,
-                    $entry->created_at
+            ->get()
+            ->reject(function ($family) {
+                return ! is_array($family->content);
+            })
+            ->map(function ($family) {
+                return new FamilyResult(
+                    $family->type,
+                    $family->family_hash,
+                    $family->content,
+                    $family->count,
+                    $family->duration_total,
+                    $family->duration_average
                 );
-            })->values();
+            });
     }
 
     /**
@@ -158,7 +136,7 @@ class DatabaseEntriesRepository implements Contract, ClearableRepository, Prunab
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    protected function table($table)
+    protected function table(string $table)
     {
         return DB::connection($this->connection)->table($table);
     }

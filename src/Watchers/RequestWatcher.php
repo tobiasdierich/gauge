@@ -241,6 +241,7 @@ class RequestWatcher extends Watcher
      */
     protected function familyHash($request)
     {
+        // TODO: Check if stuff like /foo/{id} gets the same family hash
         return md5($request->method() . $this->uri($request));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace TobiasDierich\Gauge;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use TobiasDierich\Gauge\Contracts\ClearableRepository;
@@ -28,6 +29,7 @@ class GaugeServiceProvider extends ServiceProvider
         $this->registerRoutes();
         $this->registerMigrations();
         $this->registerPublishing();
+        $this->registerBladeDirectives();
 
         Gauge::start($this->app);
         Gauge::listenForStorageOpportunities($this->app);
@@ -100,6 +102,18 @@ class GaugeServiceProvider extends ServiceProvider
                 __DIR__ . '/../stubs/GaugeServiceProvider.stub' => app_path('Providers/GaugeServiceProvider.php'),
             ], 'gauge-provider');
         }
+    }
+
+    /**
+     * Register the package's blade directives.
+     *
+     * @return void
+     */
+    private function registerBladeDirectives()
+    {
+        Blade::directive('formatNanoseconds', function ($expression) {
+            return "<?php echo (number_format(floor($expression / 1000)) . 'ms'); ?>";
+        });
     }
 
     /**
