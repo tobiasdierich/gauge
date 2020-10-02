@@ -17,8 +17,8 @@ class DashboardController extends Controller
      */
     public function index(EntriesRepository $storage)
     {
-        // TODO: order by total time
         $options = (new FamilyQueryOptions())
+            ->orderBy('duration_total')
             ->limit(5);
 
         return view('gauge::dashboard', [

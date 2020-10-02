@@ -54,8 +54,8 @@ class EntryModel extends Model
     /**
      * Scope the query for the given query options.
      *
-     * @param \Illuminate\Database\Eloquent\Builder          $query
-     * @param string                                         $type
+     * @param \Illuminate\Database\Eloquent\Builder           $query
+     * @param string                                          $type
      * @param \TobiasDierich\Gauge\Storage\FamilyQueryOptions $options
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -64,7 +64,8 @@ class EntryModel extends Model
     {
         $this->addFamilySelects($query)
             ->whereType($query, $type)
-            ->whereFamilyHash($query, $options);
+            ->whereFamilyHash($query, $options)
+            ->orderFamilyBy($query, $options);
 
         return $query;
     }
@@ -89,7 +90,7 @@ class EntryModel extends Model
     /**
      * Scope the query for the given type.
      *
-     * @param \Illuminate\Database\Eloquent\Builder          $query
+     * @param \Illuminate\Database\Eloquent\Builder           $query
      * @param \TobiasDierich\Gauge\Storage\FamilyQueryOptions $options
      *
      * @return $this
@@ -104,13 +105,30 @@ class EntryModel extends Model
     }
 
     /**
+     * Order the query by the given column.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder           $query
+     * @param \TobiasDierich\Gauge\Storage\FamilyQueryOptions $options
+     *
+     * @return $this
+     */
+    protected function orderFamilyBy($query, FamilyQueryOptions $options)
+    {
+        $query->when($options->orderBy, function ($query, $orderBy) {
+            return $query->orderBy($orderBy, 'desc');
+        });
+
+        return $this;
+    }
+
+    /**
      * Add family related selects to the query.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      *
      * @return $this
      */
-    public function addFamilySelects($query)
+    protected function addFamilySelects($query)
     {
         $sub = EntryModel::query()
             ->addSelect([
@@ -127,44 +145,10 @@ class EntryModel extends Model
             'content',
             DB::raw('aggregates.count as count'),
             DB::raw('aggregates.total as duration_total'),
-            DB::raw('aggregates.avg as duration_average')
+            DB::raw('aggregates.avg as duration_average'),
         ])->joinSub($sub, 'aggregates', function ($join) {
             $join->on('sequence', '=', 'aggregates.sequence2');
         });
-
-        return $this;
-    }
-
-    /**
-     * Order the query by the average family cost.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string                                $direction
-     *
-     * @return $this
-     */
-    protected function orderByAverageFamilyCost($query, string $direction = 'desc')
-    {
-        $query->groupBy('family_hash')
-            ->addSelect(DB::raw('(sum(duration) / count(*)) as avg'))
-            ->orderBy('avg', $direction);
-
-        return $this;
-    }
-
-    /**
-     * Order the query by the total family cost.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string                                $direction
-     *
-     * @return $this
-     */
-    protected function orderByTotalFamilyCost($query, string $direction = 'desc')
-    {
-        $query->groupBy('family_hash')
-            ->addSelect(DB::raw('sum(duration) as total'))
-            ->orderBy('avg', $direction);
 
         return $this;
     }

@@ -14,6 +14,13 @@ class FamilyQueryOptions
     public $familyHash;
 
     /**
+     * The column by which the results should be sorted.
+     *
+     * @var string
+     */
+    public $orderBy;
+
+    /**
      * The number of entries to retrieve.
      *
      * @var int
@@ -31,6 +38,7 @@ class FamilyQueryOptions
     {
         return (new static)
             ->familyHash($request->family_hash)
+            ->orderBy($request->order_by)
             ->limit($request->take ?? 50);
     }
 
@@ -44,6 +52,20 @@ class FamilyQueryOptions
     public function familyHash(?string $familyHash)
     {
         $this->familyHash = $familyHash;
+
+        return $this;
+    }
+
+    /**
+     * Set the column by which the results should be sroted.
+     *
+     * @param string|null $orderBy
+     *
+     * @return $this
+     */
+    public function orderBy(?string $orderBy)
+    {
+        $this->orderBy = $orderBy;
 
         return $this;
     }
