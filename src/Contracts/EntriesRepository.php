@@ -10,12 +10,22 @@ interface EntriesRepository
     /**
      * Return all the entry families of a given type.
      *
-     * @param string|null                                    $type
+     * @param string|null                                     $type
      * @param \TobiasDierich\Gauge\Storage\FamilyQueryOptions $options
      *
      * @return \Illuminate\Support\Collection|\TobiasDierich\Gauge\FamilyResult[]
      */
     public function getFamilies($type, FamilyQueryOptions $options);
+
+    /**
+     * Return all the entries of a family of a given type.
+     *
+     * @param string $type
+     * @param string $familyHash
+     *
+     * @return \Illuminate\Support\Collection|\TobiasDierich\Gauge\FamilyResult[]
+     */
+    public function getFamilyEntries($type, $familyHash);
 
     /**
      * Store the given entries.

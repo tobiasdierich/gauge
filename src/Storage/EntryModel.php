@@ -136,6 +136,7 @@ class EntryModel extends Model
                 DB::raw('sum(duration) as total'),
                 DB::raw('(sum(duration) / count(*)) as avg'),
                 DB::raw('min(sequence) as sequence2'),
+                DB::raw('max(created_at) as last_seen')
             ])
             ->groupBy(['family_hash', 'type']);
 
@@ -146,6 +147,7 @@ class EntryModel extends Model
             DB::raw('aggregates.count as count'),
             DB::raw('aggregates.total as duration_total'),
             DB::raw('aggregates.avg as duration_average'),
+            DB::raw('aggregates.last_seen as last_seen')
         ])->joinSub($sub, 'aggregates', function ($join) {
             $join->on('sequence', '=', 'aggregates.sequence2');
         });

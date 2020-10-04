@@ -2,6 +2,7 @@
 
 namespace TobiasDierich\Gauge;
 
+use Carbon\Carbon;
 use JsonSerializable;
 
 class FamilyResult implements JsonSerializable
@@ -49,16 +50,24 @@ class FamilyResult implements JsonSerializable
     public $duration_average;
 
     /**
+     * The date & time when the request family was last seen.
+     *
+     * @var \Carbon\Carbon
+     */
+    public $last_seen;
+
+    /**
      * Create a new family result instance.
      *
-     * @param string $type
-     * @param string $familyHash
-     * @param array  $content
-     * @param int    $count
-     * @param int    $duration_total
-     * @param int    $duration_average
+     * @param string         $type
+     * @param string         $familyHash
+     * @param array          $content
+     * @param int            $count
+     * @param int            $duration_total
+     * @param int            $duration_average
+     * @param \Carbon\Carbon $last_seen
      */
-    public function __construct(string $type, string $familyHash, array $content, int $count, int $duration_total, int $duration_average)
+    public function __construct(string $type, string $familyHash, array $content, int $count, int $duration_total, int $duration_average, Carbon $last_seen)
     {
         $this->type = $type;
         $this->content = $content;
@@ -66,6 +75,7 @@ class FamilyResult implements JsonSerializable
         $this->count = $count;
         $this->duration_total = $duration_total;
         $this->duration_average = $duration_average;
+        $this->last_seen = $last_seen;
     }
 
     /**
@@ -82,6 +92,7 @@ class FamilyResult implements JsonSerializable
             'count'            => $this->count,
             'duration_total'   => $this->duration_total,
             'duration_average' => $this->duration_average,
+            'last_seen'        => $this->last_seen,
         ];
     }
 }

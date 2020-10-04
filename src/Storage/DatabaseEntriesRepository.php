@@ -2,12 +2,14 @@
 
 namespace TobiasDierich\Gauge\Storage;
 
+use Carbon\Carbon;
 use DateTimeInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use TobiasDierich\Gauge\Contracts\ClearableRepository;
 use TobiasDierich\Gauge\Contracts\EntriesRepository as Contract;
 use TobiasDierich\Gauge\Contracts\PrunableRepository;
+use TobiasDierich\Gauge\EntryResult;
 use TobiasDierich\Gauge\FamilyResult;
 
 class DatabaseEntriesRepository implements Contract, ClearableRepository, PrunableRepository
@@ -64,7 +66,37 @@ class DatabaseEntriesRepository implements Contract, ClearableRepository, Prunab
                 $family->content,
                 $family->count,
                 $family->duration_total,
-                $family->duration_average
+                $family->duration_average,
+                Carbon::parse($family->last_seen)
+            );
+        }));
+
+        return $paginatedResults;
+    }
+
+    /**
+     * Return all entries of a given type.
+     *
+     * @param string $type
+     * @param string $familyHash
+     *
+     * @return \Illuminate\Support\Collection|\TobiasDierich\Gauge\FamilyResult[]
+     */
+    public function getFamilyEntries($type, $familyHash)
+    {
+        $paginatedResults = EntryModel::on($this->connection)
+            ->whereFamilyHash($familyHash)
+            ->whereType($type)
+            ->orderByDesc('sequence')
+            ->paginate(5);
+
+        $paginatedResults->setCollection($paginatedResults->getCollection()->map(function ($entry) {
+            return new EntryResult(
+                $entry->type,
+                $entry->family_hash,
+                $entry->content,
+                $entry->duration,
+                $entry->created_at
             );
         }));
 

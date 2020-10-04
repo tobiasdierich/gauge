@@ -15,12 +15,12 @@
     <link href="{{ asset(mix('base.css', 'vendor/gauge')) }}" rel="stylesheet" type="text/css">
 </head>
 <body class="min-h-screen bg-gray-200 font-sans antialiased text-gray-700">
-    <div class="container mx-auto min-h-screen flex flex-col space-y-8">
+    <div class="container mx-auto min-h-screen flex flex-col">
         <div>
             @include('gauge::partials.header')
         </div>
 
-        <div class="w-full flex space-x-12">
+        <div class="w-full flex space-x-12 py-8">
             <div class="w-64">
                 @include('gauge::partials.sidebar')
             </div>
