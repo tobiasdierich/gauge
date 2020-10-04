@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('gauge-api')->group(function () {
-    Route::get('requests', 'Api\RequestsController@index');
     Route::post('requests/metrics', 'Api\RequestMetricsController@show');
 
-    Route::get('queries', 'Api\QueriesController@index');
     Route::post('queries/metrics', 'Api\QueryMetricsController@show');
 });
 
-Route::get('/', 'DashboardController@index');
+Route::get('/', 'DashboardController@index')->name('gauge.dashboard');
+Route::get('/requests', 'RequestsController@index')->name('gauge.requests');
+Route::get('/queries', 'QueriesController@index')->name('gauge.queries');

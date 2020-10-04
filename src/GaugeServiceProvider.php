@@ -112,7 +112,7 @@ class GaugeServiceProvider extends ServiceProvider
     private function registerBladeDirectives()
     {
         Blade::directive('formatNanoseconds', function ($expression) {
-            return "<?php echo (number_format(floor($expression / 1000)) . 'ms'); ?>";
+            return "<?php echo \TobiasDierich\Gauge\GaugeHelper::formatNanoseconds($expression) ?>";
         });
     }
 

@@ -12,7 +12,7 @@
         </th>
     </tr>
     </thead>
-    <tbody class="bg-white divide-y divide-gray-200">
+    <tbody class="divide-y divide-gray-200">
     @foreach($queries as $query)
         <tr>
             <td class="px-4 py-2 whitespace-no-wrap">
@@ -28,3 +28,9 @@
     @endforeach
     </tbody>
 </table>
+
+@empty($requests->items())
+    <div class="py-16 flex justify-center items-center">
+        <p class="text-gray-600">No entries</p>
+    </div>
+@endempty

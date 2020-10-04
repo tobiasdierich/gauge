@@ -53,23 +53,22 @@ class DatabaseEntriesRepository implements Contract, ClearableRepository, Prunab
      */
     public function getFamilies($type, FamilyQueryOptions $options)
     {
-        return EntryModel::on($this->connection)
+        $paginatedResults = EntryModel::on($this->connection)
             ->withFamilyOptions($type, $options)
-            ->take($options->limit)
-            ->get()
-            ->reject(function ($family) {
-                return ! is_array($family->content);
-            })
-            ->map(function ($family) {
-                return new FamilyResult(
-                    $family->type,
-                    $family->family_hash,
-                    $family->content,
-                    $family->count,
-                    $family->duration_total,
-                    $family->duration_average
-                );
-            });
+            ->paginate($options->limit);
+
+        $paginatedResults->setCollection($paginatedResults->getCollection()->map(function ($family) {
+            return new FamilyResult(
+                $family->type,
+                $family->family_hash,
+                $family->content,
+                $family->count,
+                $family->duration_total,
+                $family->duration_average
+            );
+        }));
+
+        return $paginatedResults;
     }
 
     /**
