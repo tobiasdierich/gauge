@@ -47,6 +47,7 @@ class RequestWatcher extends Watcher
         $incomingEntry = IncomingEntry::make([
             'ip_address'        => $event->request->ip(),
             'uri'               => $this->uri($event->request),
+            'route'             => $this->route($event->request),
             'method'            => $event->request->method(),
             'controller_action' => optional($event->request->route())->getActionName(),
             'middleware'        => array_values(optional($event->request->route())->gatherMiddleware() ?? []),
@@ -73,6 +74,18 @@ class RequestWatcher extends Watcher
     protected function uri($request)
     {
         return str_replace($request->root(), '', $request->fullUrl()) ?: '/';
+    }
+
+    /**
+     * Get the route of the request.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return string
+     */
+    protected function route($request)
+    {
+        return $request->route()->uri() ?: '/';
     }
 
     /**
@@ -241,7 +254,6 @@ class RequestWatcher extends Watcher
      */
     protected function familyHash($request)
     {
-        // TODO: Check if stuff like /foo/{id} gets the same family hash
-        return md5($request->method() . $this->uri($request));
+        return md5($request->method() . $this->route($request));
     }
 }
