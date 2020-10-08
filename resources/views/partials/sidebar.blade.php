@@ -1,4 +1,4 @@
-<nav class="flex flex-col space-y-8 px-4">
+<nav class="flex flex-col md:space-y-8 px-4">
     <div>
         <a
             class="flex px-2 py-2 items-center hover:bg-gray-300 rounded {{ Route::is('gauge.dashboard') ? 'font-semibold text-indigo-600 bg-gray-300' : '' }}"

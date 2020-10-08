@@ -20,8 +20,8 @@
             @include('gauge::partials.header')
         </div>
 
-        <div class="w-full flex md:space-x-12 py-8">
-            <div class="hidden md:block w-64">
+        <div class="w-full flex flex-col md:flex-row md:space-x-12 space-y-12 md:space-y-0 py-8">
+            <div class="block w-full md:w-64">
                 @include('gauge::partials.sidebar')
             </div>
 
