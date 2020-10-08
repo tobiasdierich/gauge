@@ -4,10 +4,10 @@
         <th class="px-4 py-1 text-left leading-4 font-medium text-gray-600 uppercase tracking-wider">
             Action
         </th>
-        <th class="px-4 py-1 text-left leading-4 font-medium text-gray-600 uppercase tracking-wider">
+        <th class="px-2 md:px-4 py-1 text-left leading-4 font-medium text-gray-600 uppercase tracking-wider">
             # Requests
         </th>
-        <th class="px-4 py-1 text-left leading-4 font-medium text-gray-600 uppercase tracking-wider">
+        <th class="px-2 md:px-4 py-1 text-left leading-4 font-medium text-gray-600 uppercase tracking-wider">
             Average Time
         </th>
     </tr>
@@ -28,14 +28,14 @@
             </td>
             <td class="whitespace-no-wrap">
                 <a href="{{ route('gauge.requests.show', ['familyHash' => $request->familyHash]) }}">
-                    <div class="px-4 py-2">
+                    <div class="px-2 md:px-4 py-2">
                         {{ number_format($request->count) }}
                     </div>
                 </a>
             </td>
             <td class="whitespace-no-wrap">
                 <a href="{{ route('gauge.requests.show', ['familyHash' => $request->familyHash]) }}">
-                    <div class="px-4 py-2">
+                    <div class="px-2 md:px-4 py-2">
                         @formatNanoseconds($request->duration_average)
                     </div>
                 </a>

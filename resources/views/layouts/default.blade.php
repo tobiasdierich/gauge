@@ -20,12 +20,12 @@
             @include('gauge::partials.header')
         </div>
 
-        <div class="w-full flex space-x-12 py-8">
-            <div class="w-64">
+        <div class="w-full flex md:space-x-12 py-8">
+            <div class="hidden md:block w-64">
                 @include('gauge::partials.sidebar')
             </div>
 
-            <div class="flex-grow px-4">
+            <div class="max-w-full flex-grow px-4">
                 @yield('body')
             </div>
         </div>

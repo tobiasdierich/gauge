@@ -1,22 +1,22 @@
 @extends('gauge::layouts.default')
 
 @section('body')
-    <div class="flex space-x-8">
-        <div class="w-1/2">
+    <div class="flex flex-wrap space-y-8 md:flex-no-wrap md:space-y-0 md:space-x-8">
+        <div class="w-full md:w-1/2">
             <div id="requestsChart">
                 <chart :title="title" :endpoint="endpoint"></chart>
             </div>
         </div>
 
-        <div class="w-1/2">
+        <div class="w-full md:w-1/2">
             <div id="queriesChart">
                 <chart :title="title" :endpoint="endpoint"></chart>
             </div>
         </div>
     </div>
 
-    <div class="mt-16 flex space-x-8">
-        <div class="w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="mt-16 flex flex-wrap space-y-8 md:flex-no-wrap md:space-y-0 md:space-x-8">
+        <div class="w-full md:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="p-4 flex justify-between items-baseline text-gray-600">
                 <h2 class="font-semibold">Expensive Requests</h2>
 
@@ -34,7 +34,7 @@
             @include('gauge::partials.dashboard.requests-table')
         </div>
 
-        <div class="w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="w-full md:w-1/2 bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="p-4 flex justify-between items-baseline text-gray-600">
                 <h2 class="font-semibold">Expensive Queries</h2>
 
