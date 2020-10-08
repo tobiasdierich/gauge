@@ -29,7 +29,7 @@
     </tbody>
 </table>
 
-@empty($requests->items())
+@empty($queries->items())
     <div class="py-16 flex justify-center items-center">
         <p class="text-gray-600">No entries</p>
     </div>
