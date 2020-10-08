@@ -12,13 +12,13 @@
     </div>
 
     <div class="flex flex-col">
-        <a class="flex px-2 py-2 items-center hover:bg-gray-300 rounded {{ Route::is('gauge.requests') ? 'font-semibold text-indigo-600 bg-gray-300' : '' }}" href="{{ route('gauge.requests') }}">
+        <a class="flex px-2 py-2 items-center hover:bg-gray-300 rounded {{ \TobiasDierich\Gauge\Gauge::isActiveRouteGroup('requests') ? 'font-semibold text-indigo-600 bg-gray-300' : '' }}" href="{{ route('gauge.requests.index') }}">
             <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
             </svg>
             <span class="pl-2">Requests</span>
         </a>
-        <a class="flex px-2 py-2 items-center hover:bg-gray-300 rounded {{ Route::is('gauge.queries') ? 'font-semibold text-indigo-600 bg-gray-300' : '' }}" href="{{ route('gauge.queries') }}">
+        <a class="flex px-2 py-2 items-center hover:bg-gray-300 rounded {{ \TobiasDierich\Gauge\Gauge::isActiveRouteGroup('queries') ? 'font-semibold text-indigo-600 bg-gray-300' : '' }}" href="{{ route('gauge.queries.index') }}">
             <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
             </svg>

@@ -322,4 +322,22 @@ class Gauge
             'path' => config('gauge.path'),
         ];
     }
+
+    /**
+     * Check if the given route is currently active.
+     *
+     * @param string $route
+     *
+     * @return bool
+     */
+    public static function isActiveRouteGroup(string $route)
+    {
+        $currentRoute = explode('.', optional(request()->route())->getName() ?: '/');
+
+        if (count($currentRoute) < 2) {
+            return false;
+        }
+
+        return $currentRoute[1] === $route;
+    }
 }

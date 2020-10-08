@@ -23,7 +23,7 @@
             @foreach($requests as $request)
                 <tr class="hover:bg-gray-100 cursor-pointer">
                     <td class="whitespace-no-wrap">
-                        <a href="{{ route('gauge.request', ['familyHash' => $request->familyHash]) }}">
+                        <a href="{{ route('gauge.requests.show', ['familyHash' => $request->familyHash]) }}">
                             <div class="px-6 py-4">
                                 @include('gauge::components.method-badge')
 
@@ -34,21 +34,21 @@
                         </a>
                     </td>
                     <td class="whitespace-no-wrap">
-                        <a href="{{ route('gauge.request', ['familyHash' => $request->familyHash]) }}">
+                        <a href="{{ route('gauge.requests.show', ['familyHash' => $request->familyHash]) }}">
                             <div class="px-6 py-4">
                                 {{ number_format($request->count) }}
                             </div>
                         </a>
                     </td>
                     <td class="whitespace-no-wrap">
-                        <a href="{{ route('gauge.request', ['familyHash' => $request->familyHash]) }}">
+                        <a href="{{ route('gauge.requests.show', ['familyHash' => $request->familyHash]) }}">
                             <div class="px-6 py-4">
                                 @formatNanoseconds($request->duration_average)
                             </div>
                         </a>
                     </td>
                     <td class="whitespace-no-wrap">
-                        <a href="{{ route('gauge.request', ['familyHash' => $request->familyHash]) }}">
+                        <a href="{{ route('gauge.requests.show', ['familyHash' => $request->familyHash]) }}">
                             <div class="px-6 py-4">
                                 @formatNanoseconds($request->duration_total)
                             </div>

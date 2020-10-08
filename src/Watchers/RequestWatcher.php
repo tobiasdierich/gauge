@@ -85,7 +85,7 @@ class RequestWatcher extends Watcher
      */
     protected function route($request)
     {
-        return $request->route()->uri() ?: '/';
+        return optional($request->route())->uri() ?: '/';
     }
 
     /**

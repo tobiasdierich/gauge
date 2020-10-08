@@ -20,7 +20,7 @@
             <div class="p-4 flex justify-between items-baseline text-gray-600">
                 <h2 class="font-semibold">Expensive Requests</h2>
 
-                <a class="flex items-center text-sm hover:text-gray-700" href="{{ route('gauge.requests') }}">
+                <a class="flex items-center text-sm hover:text-gray-700" href="{{ route('gauge.requests.index') }}">
                     View All
 
                     <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -38,7 +38,7 @@
             <div class="p-4 flex justify-between items-baseline text-gray-600">
                 <h2 class="font-semibold">Expensive Queries</h2>
 
-                <a class="flex items-center text-sm hover:text-gray-700" href="{{ route('gauge.queries') }}">
+                <a class="flex items-center text-sm hover:text-gray-700" href="{{ route('gauge.queries.index') }}">
                     View All
 
                     <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
