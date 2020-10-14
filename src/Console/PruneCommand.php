@@ -12,7 +12,7 @@ class PruneCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'gauge:prune {--hours=24 : The number of hours to retain Gauge data}';
+    protected $signature = 'gauge:prune {--hours=168 : The number of hours to retain Gauge data}';
 
     /**
      * The console command description.
