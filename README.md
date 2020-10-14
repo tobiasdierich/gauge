@@ -6,6 +6,8 @@
 
 Gauge is an easy to use package to monitor the performance of your Laravel applications. Gauge in based on [Laravel Telescope](https://github.com/laravel/telescope).
 
+![Gauge](/.github/banner.jpg)
+
 ## Requirements
 
 Gauge works with the latest Laravel version starting at v6. The package has been tested with the latest versions of MySQL (v8) and Postgres (v13). Other version might work as well but are not supported officially.
