@@ -21,7 +21,7 @@
                         @include('gauge::components.method-badge')
 
                         <span class="block pl-1">
-                            {{ strrev(\Illuminate\Support\Str::limit(strrev($request->content['uri']), 30)) }}
+                            {{ strrev(\Illuminate\Support\Str::limit(strrev($request->content['route']), 30)) }}
                         </span>
                     </div>
                 </a>
