@@ -34,6 +34,12 @@ class InstallCommand extends Command
         $this->comment('Publishing Gauge Configuration...');
         $this->callSilent('vendor:publish', ['--tag' => 'gauge-config']);
 
+        $this->comment('Publishing Gauge Configuration...');
+        $this->callSilent('vendor:publish', ['--tag' => 'gauge-config']);
+
+        $this->comment('Publishing Gauge Assets...');
+        $this->callSilent('vendor:publish', ['--tag' => 'gauge-assets', '--force' => true]);
+
         $this->registerGaugeServiceProvider();
 
         $this->info('Gauge scaffolding installed successfully.');
