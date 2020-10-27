@@ -37,7 +37,8 @@ function fetchMetric (endpoint, data) {
     return fetch(endpoint, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json;charset=utf-8',
+            'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.content || undefined
         },
         body: JSON.stringify(data)
     })
