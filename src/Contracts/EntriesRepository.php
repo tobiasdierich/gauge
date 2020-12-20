@@ -8,6 +8,16 @@ use TobiasDierich\Gauge\Storage\FamilyQueryOptions;
 interface EntriesRepository
 {
     /**
+     * Return one family of a given type.
+     *
+     * @param string $type
+     * @param string $options
+     *
+     * @return \TobiasDierich\Gauge\FamilyResult|null
+     */
+    public function getFamily($type, $familyHash);
+
+    /**
      * Return all the entry families of a given type.
      *
      * @param string|null                                     $type

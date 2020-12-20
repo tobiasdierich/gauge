@@ -46,6 +46,35 @@ class DatabaseEntriesRepository implements Contract, ClearableRepository, Prunab
     }
 
     /**
+     * Return one family of a given type.
+     *
+     * @param string $type
+     * @param string $options
+     *
+     * @return \TobiasDierich\Gauge\FamilyResult|null
+     */
+    public function getFamily($type, $familyHash)
+    {
+        $family = EntryModel::on($this->connection)
+            ->withFamilyOptions($type, (new FamilyQueryOptions())->familyHash($familyHash))
+            ->first();
+
+        if (!$family) {
+            return null;
+        }
+
+        return new FamilyResult(
+            $family->type,
+            $family->family_hash,
+            $family->content,
+            $family->count,
+            $family->duration_total,
+            $family->duration_average,
+            Carbon::parse($family->last_seen)
+        );
+    }
+
+    /**
      * Return all families of a given type.
      *
      * @param string|null                                     $type
