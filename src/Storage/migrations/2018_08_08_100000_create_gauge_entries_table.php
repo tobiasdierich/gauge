@@ -40,20 +40,22 @@ class CreateGaugeEntriesTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('gauge_entries', function (Blueprint $table) {
-            $table->bigIncrements('sequence');
-            $table->uuid('uuid');
-            $table->string('family_hash');
-            $table->string('type', 20);
-            $table->integer('duration');
-            $table->jsonb('content');
-            $table->dateTime('created_at')->nullable();
-
-            $table->unique('uuid');
-            $table->index('family_hash');
-            $table->index('type');
-            $table->index('created_at');
-        });
+        if(!$this->schema->hasTable('gauge_entries')) {
+            $this->schema->create('gauge_entries', function (Blueprint $table) {
+                $table->bigIncrements('sequence');
+                $table->uuid('uuid');
+                $table->string('family_hash');
+                $table->string('type', 20);
+                $table->integer('duration');
+                $table->jsonb('content');
+                $table->dateTime('created_at')->nullable();
+    
+                $table->unique('uuid');
+                $table->index('family_hash');
+                $table->index('type');
+                $table->index('created_at');
+            });
+        }
     }
 
     /**
